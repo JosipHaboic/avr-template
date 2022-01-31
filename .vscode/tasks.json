@@ -1,0 +1,39 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "AVR Build",
+			"type": "shell",
+			"command": ["SET AVR_CPU_FREQUENCY_HZ=16000000 && cargo build --target avr-atmega328p.json -Z build-std=core --release --verbose"],
+			"presentation": {
+				"clear": true
+			}
+		},
+		{
+			"label": "AVR Upload",
+			"type": "shell",
+			"command": "avrdude -p atmega328p -P COM5 -D -U flash:w:target/avr-atmega328p/release/template-bin.elf:e -c arduino  -v -b57600",
+			"presentation": {
+				"clear": true
+			}
+		},
+		{
+			"label": "Clippy",
+			"type": "shell",
+			"command": "cargo clippy",
+			"presentation": {
+				"clear": true
+			}
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"command": "cargo clean",
+			"presentation": {
+				"clear": true
+			}
+		},
+	]
+}
